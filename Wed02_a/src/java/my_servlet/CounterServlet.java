@@ -16,7 +16,8 @@ import javax.servlet.http.HttpServletResponse;
  *
  * @author ACER
  */
-public class BangCuuChuongServlet extends HttpServlet {
+public class CounterServlet extends HttpServlet {
+    private int counter=0;
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -35,37 +36,11 @@ public class BangCuuChuongServlet extends HttpServlet {
             out.println("<!DOCTYPE html>");
             out.println("<html>");
             out.println("<head>");
-            out.println("<title>Servlet BangCuuChuongServlet</title>");  
-            out.println("<style>");
-        out.println("body {");
-        out.println("    font-family: Arial, sans-serif;");
-        out.println("    margin: 20px;");
-        out.println("    background-color: #f9f9f9;");
-        out.println("}");
-        out.println("h4 {");
-        out.println("    color: #333;");
-        out.println("    margin-bottom: 10px;");
-        out.println("}");
-        out.println(".table-container {");
-        out.println("    border: 1px solid #ccc;");
-        out.println("    padding: 10px;");
-        out.println("    background-color: #fff;");
-        out.println("    margin-bottom: 20px;");
-        out.println("    border-radius: 5px;");
-        out.println("    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);");
-        out.println("}");
-        out.println("</style>");
-        out.println("</head>");
+            out.println("<title>Servlet CounterServlet</title>");            
             out.println("</head>");
             out.println("<body>");
-            for(int i=2; i<=10; i++){
-                out.println("<h4>Bảng cửu chương" + i + "</h4>");
-                for(int j=1; j<=10; j++){
-                    out.println(i+ "*" + j + "=" + (i*j) + "</br>");
-                }
-                out.println("<hr>");
-            }
-            
+            counter++;
+            out.println("<h1>" + counter + "</h1>");
             out.println("</body>");
             out.println("</html>");
         }

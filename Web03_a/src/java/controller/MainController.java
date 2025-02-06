@@ -3,11 +3,12 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package my_servlet;
+package controller;
 
 import java.io.IOException;
 import java.io.PrintWriter;
 import javax.servlet.ServletException;
+import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -16,7 +17,17 @@ import javax.servlet.http.HttpServletResponse;
  *
  * @author ACER
  */
-public class BangCuuChuongServlet extends HttpServlet {
+@WebServlet(name = "MainController", urlPatterns = {"/MainController"})
+public class MainController extends HttpServlet {
+    public  int GCD(int a, int b){
+        int  min = Math.min(a, b);
+        for(int i = min; i>=1; i--){
+            if(a%i==0 && b%i==0 ){
+                return i;
+            }
+        }
+       return 1;     
+    }
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -30,45 +41,41 @@ public class BangCuuChuongServlet extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
-        try (PrintWriter out = response.getWriter()) {
-            /* TODO output your page here. You may use following sample code. */
-            out.println("<!DOCTYPE html>");
-            out.println("<html>");
-            out.println("<head>");
-            out.println("<title>Servlet BangCuuChuongServlet</title>");  
-            out.println("<style>");
-        out.println("body {");
-        out.println("    font-family: Arial, sans-serif;");
-        out.println("    margin: 20px;");
-        out.println("    background-color: #f9f9f9;");
-        out.println("}");
-        out.println("h4 {");
-        out.println("    color: #333;");
-        out.println("    margin-bottom: 10px;");
-        out.println("}");
-        out.println(".table-container {");
-        out.println("    border: 1px solid #ccc;");
-        out.println("    padding: 10px;");
-        out.println("    background-color: #fff;");
-        out.println("    margin-bottom: 20px;");
-        out.println("    border-radius: 5px;");
-        out.println("    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);");
-        out.println("}");
-        out.println("</style>");
-        out.println("</head>");
-            out.println("</head>");
-            out.println("<body>");
-            for(int i=2; i<=10; i++){
-                out.println("<h4>Bảng cửu chương" + i + "</h4>");
-                for(int j=1; j<=10; j++){
-                    out.println(i+ "*" + j + "=" + (i*j) + "</br>");
-                }
-                out.println("<hr>");
-            }
-            
-            out.println("</body>");
-            out.println("</html>");
+        PrintWriter out = response.getWriter();
+        String txtA=request.getParameter("txtA");
+        String txtB=request.getParameter("txtB");
+        if(txtA.trim().length()==0){
+            out.println("Please enter a!");
+            return;
         }
+        if(txtB.trim().length()==0){
+            out.println("Please enter b!");
+            return;
+        }
+        int a=0;
+        int b=0;
+        try {
+            a = Integer.parseInt(txtA);
+            if(a<=0){
+                out.println("a must be greater than zero!");
+                return;
+            }
+        }catch(Exception e){
+            out.println("a must be integer");
+            return;
+        }
+        try {
+            b = Integer.parseInt(txtB);
+            if(b<=0){
+                out.println("b must be greater than zero!");
+                return;
+            }
+        }catch(Exception e){
+            out.println("b must be integer");
+            return;
+        }
+        int result = GCD(a,b);
+        out.println("Greatest Common Divisor("+a+","+b+")="+result);
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
