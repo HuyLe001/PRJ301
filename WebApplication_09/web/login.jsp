@@ -94,6 +94,10 @@
                 <label>Password</label>
                 <input type="password" name="txtPassword" class="pixel-input"/><br/>
                 <input type="submit" value="Login" class="pixel-button"/>
+
+                <%                     String message = request.getAttribute("message") + "";
+                %>
+                <%=message.equals("null")?"":message%>
             </form>
         </div>
         <div class="footer">
